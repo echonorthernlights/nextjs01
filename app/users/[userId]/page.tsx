@@ -39,3 +39,10 @@ export default async function UserPage({ params: { userId } }: Params) {
   );
 }
 
+//Static Site Generation approach , works by providing static params in advance
+
+export async function generateStaticParams() {
+  const usersData: Promise<User[]> = getAllUsers();
+  const users = await usersData;
+  return users.map((user) => ({ userId: user.id.toString() }));
+}
